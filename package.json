@@ -1,0 +1,48 @@
+{
+  "name": "teams-linux",
+  "productName": "Microsoft Teams",
+  "version": "1.0.0",
+  "description": "A lightweight Linux wrapper for Microsoft Teams",
+  "main": "src/main.js",
+  "author": "Boominathan Alagirisamy <boominathanalagirisamy@gmail.com>",
+  "scripts": {
+    "start": "XDG_SESSION_TYPE=x11 electron . --no-sandbox",
+    "dist": "electron-builder",
+    "pack": "electron-builder --dir",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "build": {
+    "appId": "com.boominathan.teams",
+    "linux": {
+      "maintainer": "Boominathan Alagirisamy <boominathanalagirisamy@gmail.com>",
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        {
+          "target": "deb",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "category": "Network",
+      "icon": "src/assets/icon.png"
+    }
+  },
+  "license": "MIT",
+  "type": "commonjs",
+  "devDependencies": {
+    "electron": "^40.4.1",
+    "electron-builder": "^26.7.0"
+  },
+  "dependencies": {
+    "electron-context-menu": "^3.6.1",
+    "electron-store": "^11.0.2"
+  }
+}
