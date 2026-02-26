@@ -56,6 +56,31 @@ To build the AppImage and .deb packages:
 npm run dist
 ```
 
+### Installing the Debian Package
+Install the `.deb` package using `apt` to automatically handle dependencies:
+
+**For x64 (Standard Intel/AMD):**
+```bash
+sudo apt install ./dist/teams-linux_1.1.0_amd64.deb
+```
+
+**For arm64 (Raspberry Pi/Apple Silicon via VM):**
+```bash
+sudo apt install ./dist/teams-linux_1.1.0_arm64.deb
+```
+
+### Running the AppImage
+The AppImage is a portable format that doesn't require installation.
+
+1. Make it executable:
+   ```bash
+   chmod +x "dist/Microsoft Teams-1.1.0.AppImage"
+   ```
+2. Run it:
+   ```bash
+   ./"dist/Microsoft Teams-1.1.0.AppImage"
+   ```
+
 ## Docker Support
 
 You can build and run the application using Docker (requires X11 forwarding).
