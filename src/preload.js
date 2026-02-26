@@ -2,7 +2,8 @@ const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('electronAPI', {
     sendNotificationClick: () => ipcRenderer.send('notification-click'),
-    updateUnreadCount: (count) => ipcRenderer.send('unread-count', count)
+    updateUnreadCount: (count) => ipcRenderer.send('unread-count', count),
+    reconnect: () => ipcRenderer.send('reconnect-request')
 });
 
 // Proxy Notification API to capture clicks
