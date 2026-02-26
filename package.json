@@ -32,6 +32,7 @@
         }
       ],
       "category": "Network",
+      "executableName": "teams-linux",
       "icon": "src/assets/icon.png"
     }
   },

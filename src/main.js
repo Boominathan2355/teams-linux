@@ -297,21 +297,32 @@ function createWindow() {
     });
 
     // Handle external links security
+    const allowedHostnames = [
+        'microsoft.com', 'microsoftonline.com', 'live.com', 'office.com',
+        'office.net', 'office365.com', 'skype.com', 'skypeassets.com',
+        'sharepoint.com', 'sharepointonline.com', 'msteams.com', 'msftauth.net',
+        'msauth.net', 'teams.microsoft.com'
+    ];
+
+    const isUrlAllowed = (url) => {
+        try {
+            const parsedUrl = new URL(url);
+            return allowedHostnames.some(hn => parsedUrl.hostname === hn || parsedUrl.hostname.endsWith('.' + hn));
+        } catch (e) {
+            return false;
+        }
+    };
+
     mainWindow.webContents.on('will-navigate', (event, url) => {
-        const parsedUrl = new URL(url);
-        const allowedHostnames = ['microsoft.com', 'microsoftonline.com', 'live.com', 'office.com'];
-        const isAllowed = allowedHostnames.some(hn => parsedUrl.hostname === hn || parsedUrl.hostname.endsWith('.' + hn));
-        if (!isAllowed) {
+        if (url === teamsUrl || url.startsWith('data:')) return;
+        if (!isUrlAllowed(url)) {
             event.preventDefault();
             shell.openExternal(url);
         }
     });
 
     mainWindow.webContents.setWindowOpenHandler(({ url }) => {
-        const parsedUrl = new URL(url);
-        const allowedHostnames = ['microsoft.com', 'microsoftonline.com', 'live.com', 'office.com'];
-        const isAllowed = allowedHostnames.some(hn => parsedUrl.hostname === hn || parsedUrl.hostname.endsWith('.' + hn));
-        if (isAllowed) return { action: 'allow' };
+        if (isUrlAllowed(url)) return { action: 'allow' };
         shell.openExternal(url);
         return { action: 'deny' };
     });
