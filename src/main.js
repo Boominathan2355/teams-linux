@@ -50,6 +50,7 @@ function createWindow() {
         backgroundColor: '#464775', // Teams purple background
         title: 'Microsoft Teams',
         icon: path.join(__dirname, 'assets', 'icon.png'),
+        show: !process.argv.includes('--hidden'),
         webPreferences: {
             nodeIntegration: false,
             contextIsolation: true,
@@ -228,9 +229,13 @@ function createMenu() {
 
 function updateTrayIcon() {
     if (!tray) return;
-    // Note: We don't have separate icons generated yet, but we'll use icon.png
-    // In a full implementation, you'd swap for icon-offline.png or icon-unread.png
-    const iconPath = path.join(__dirname, 'assets', 'icon.png');
+    let iconName = 'icon.png';
+    if (!isOnline) {
+        iconName = 'icon-offline.png';
+    } else if (currentUnreadCount > 0) {
+        iconName = 'icon-unread.png';
+    }
+    const iconPath = path.join(__dirname, 'assets', iconName);
     tray.setImage(iconPath);
     const tooltip = isOnline ? (currentUnreadCount > 0 ? `Teams (${currentUnreadCount} unread)` : 'Teams') : 'Teams (Offline)';
     tray.setToolTip(tooltip);
