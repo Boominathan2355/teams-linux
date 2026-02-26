@@ -77,9 +77,9 @@ You can build and run the application using Docker (requires X11 forwarding).
 - `Alt+Shift+T`: Toggle Visibility
 - `Alt+Left/Right`: Navigation (Back/Forward)
 - `Ctrl+Plus/Minus/0`: Zoom Control
-- `Ctrl+Shift+I`: Toggle Developer Tools
+- `Ctrl+Shift+I`: Toggle DevTools
 - `F5` / `Ctrl+R`: Reload
 - `Ctrl+Shift+R`: Force Reload
 
 ## License
-MIT
+This project is licensed under the [MIT License](file:///home/bn/projects/teams-linux/LICENSE).
